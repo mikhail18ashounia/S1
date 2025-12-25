@@ -1,141 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>First Car Helper</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f3f4f6;
-}
+body{font-family:Arial;margin:0;background:#f5f5f5}
+header{background:#0066ff;color:white;padding:15px;text-align:center;font-size:20px;font-weight:bold}
+.cars{display:flex;flex-wrap:wrap;justify-content:center;padding:10px}
+.car{background:white;width:170px;margin:8px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,.2);padding:10px;text-align:center}
+.car img{width:100%;border-radius:10px}
+button{background:#0066ff;color:white;border:none;padding:8px;width:100%;border-radius:5px;margin-top:5px}
 
-header {
-  background: #2563eb;
-  color: white;
-  padding: 16px;
-  text-align: center;
-  font-size: 22px;
-}
-
-.car-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
-  padding: 12px;
-}
-
-.car-card {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,.1);
-  padding: 10px;
-  text-align: center;
-}
-
-.car-card img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-.car-card h3 {
-  margin: 10px 0 4px;
-}
-
-.car-card button {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 8px;
-  border-radius: 6px;
-  width: 100%;
-  margin-top: 6px;
-}
-
-.compare-box {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: white;
-  border-top: 2px solid #ddd;
-  padding: 10px;
-  display: none;
-}
-
-.compare-card {
-  background: #f3f4f6;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
+#compare{background:white;margin:10px;padding:10px;border-radius:10px}
 </style>
 </head>
 
 <body>
 
-<header>First Car Helper</header>
+<header>🚗 First Car Helper</header>
 
-<div class="car-list">
+<div class="cars" id="cars"></div>
 
-<div class="car-card">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Toyota_Yaris_2020.jpg">
-  <h3>Toyota Yaris</h3>
-  <p>€17,000</p>
-  <button onclick="addCar('Yaris')">Compare</button>
-</div>
-
-<div class="car-card">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Ford_Fiesta_ST_Line_1.0_Front.jpg">
-  <h3>Ford Fiesta</h3>
-  <p>€16,500</p>
-  <button onclick="addCar('Fiesta')">Compare</button>
-</div>
-
-<div class="car-card">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Volkswagen_Polo_2021.jpg">
-  <h3>VW Polo</h3>
-  <p>€18,000</p>
-  <button onclick="addCar('Polo')">Compare</button>
-</div>
-
-</div>
-
-<div class="compare-box" id="compareBox"></div>
+<div id="compare"></div>
 
 <script>
 const cars = {
-  Yaris: { name:"Toyota Yaris", price:"€17,000", engine:"1.5L", fuel:"Petrol" },
-  Fiesta: { name:"Ford Fiesta", price:"€16,500", engine:"1.0L", fuel:"Petrol" },
-  Polo: { name:"VW Polo", price:"€18,000", engine:"1.0L", fuel:"Petrol" }
-}
+"Toyota Yaris":{price:"€17,000",engine:"1.5L",fuel:"Petrol",hp:"120",img:"https://upload.wikimedia.org/wikipedia/commons/9/9b/Toyota_Yaris_2020.jpg"},
+"Ford Fiesta":{price:"€16,500",engine:"1.0L",fuel:"Petrol",hp:"100",img:"https://upload.wikimedia.org/wikipedia/commons/5/57/Ford_Fiesta_ST_Line_1.0_Front.jpg"},
+"VW Polo":{price:"€18,000",engine:"1.0L",fuel:"Petrol",hp:"95",img:"https://upload.wikimedia.org/wikipedia/commons/e/ed/Volkswagen_Polo_2021.jpg"},
+"Hyundai i20":{price:"€15,500",engine:"1.2L",fuel:"Petrol",hp:"84",img:"https://upload.wikimedia.org/wikipedia/commons/2/2d/Hyundai_i20_2021.jpg"},
+"Kia Rio":{price:"€15,000",engine:"1.2L",fuel:"Petrol",hp:"84",img:"https://upload.wikimedia.org/wikipedia/commons/5/5e/Kia_Rio_2021.jpg"},
+"Suzuki Swift":{price:"€14,500",engine:"1.2L",fuel:"Petrol",hp:"83",img:"https://upload.wikimedia.org/wikipedia/commons/f/f0/Suzuki_Swift_2021.jpg"},
+"Skoda Fabia":{price:"€16,000",engine:"1.0L",fuel:"Petrol",hp:"95",img:"https://upload.wikimedia.org/wikipedia/commons/8/86/Skoda_Fabia_2021.jpg"},
+"Peugeot 208":{price:"€17,500",engine:"1.2L",fuel:"Petrol",hp:"100",img:"https://upload.wikimedia.org/wikipedia/commons/3/3a/Peugeot_208_2021.jpg"},
+"Seat Ibiza":{price:"€16,000",engine:"1.0L",fuel:"Petrol",hp:"95",img:"https://upload.wikimedia.org/wikipedia/commons/3/32/Seat_Ibiza_2021.jpg"},
+"Renault Clio":{price:"€16,500",engine:"1.0L",fuel:"Petrol",hp:"90",img:"https://upload.wikimedia.org/wikipedia/commons/7/7a/Renault_Clio_2020.jpg"},
+"Toyota Aygo":{price:"€13,500",engine:"1.0L",fuel:"Petrol",hp:"72",img:"https://upload.wikimedia.org/wikipedia/commons/d/d4/Toyota_Aygo_2021.jpg"},
+"Hyundai i10":{price:"€13,000",engine:"1.0L",fuel:"Petrol",hp:"67",img:"https://upload.wikimedia.org/wikipedia/commons/3/35/Hyundai_i10_2021.jpg"},
+"Dacia Sandero":{price:"€14,000",engine:"1.0L",fuel:"Petrol",hp:"90",img:"https://upload.wikimedia.org/wikipedia/commons/9/9f/Dacia_Sandero_2021.jpg"}
+};
 
-let selected = []
+let selected=[];
 
-function addCar(car) {
-  if (selected.includes(car) || selected.length >= 2) return
-  selected.push(car)
-  showCompare()
-}
-
-function showCompare() {
-  const box = document.getElementById("compareBox")
-  box.style.display = "block"
-  box.innerHTML = ""
-
-  selected.forEach(c => {
-    box.innerHTML += `
-      <div class="compare-card">
-        <strong>${cars[c].name}</strong><br>
-        Price: ${cars[c].price}<br>
-        Engine: ${cars[c].engine}<br>
-        Fuel: ${cars[c].fuel}
-      </div>
-    `
-  })
-}
-</script>
-
-</body>
-</html>
+const list=document.getElementById("cars");
+for(let car in cars){
+list.innerHTML+=`
+<div class="car">
+<img src="${cars[car].img}">
+<h4>${car}</h4>
+<p>${cars[car].price}</p>
+<button onclick="compare('${
