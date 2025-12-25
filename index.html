@@ -3,194 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>First Car Helper</title>
-
+<title>First Car Helper - Compare Cars</title>
 <style>
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f4f6f8;
-}
-
-header{
-    background:#0d6efd;
-    color:white;
-    padding:15px;
-    text-align:center;
-    font-size:22px;
-}
-
-.car-list{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    padding:15px;
-    gap:15px;
-}
-
-.car-card{
-    background:white;
-    width:180px;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    padding:10px;
-    text-align:center;
-}
-
-.car-card img{
-    width:100%;
-    border-radius:10px;
-}
-
-.car-card h3{
-    margin:8px 0 4px;
-}
-
-button{
-    background:#0d6efd;
-    color:white;
-    border:none;
-    padding:8px;
-    width:100%;
-    border-radius:8px;
-    margin-top:8px;
-}
-
-.compare{
-    background:white;
-    margin:10px;
-    padding:15px;
-    border-radius:10px;
-    display:none;
-}
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f7f7f7; }
+  header { background:#007BFF; color:white; padding:1rem; text-align:center; position:sticky; top:0; }
+  .car-list { display:flex; flex-wrap:wrap; justify-content:center; padding:1rem; gap:1rem; }
+  .car-card { background:white; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); width:180px; padding:1rem; text-align:center; }
+  .car-card img { width:100%; border-radius:8px; height:120px; object-fit:cover; }
+  button { background:#007BFF; color:white; border:none; padding:0.5rem; border-radius:4px; cursor:pointer; margin-top:0.5rem; }
+  .compare-container { display:none; margin:1rem; overflow:hidden; }
+  .compare-slider { display:flex; transition:transform 0.3s ease; }
+  .compare-card { min-width:100%; background:white; padding:1rem; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+  .compare-card img { width:100%; border-radius:8px; margin-bottom:0.5rem; }
+  .nav-buttons { display:flex; justify-content:space-between; margin:0 1rem; }
+  .nav-buttons button { width:48%; }
 </style>
 </head>
-
 <body>
 
-<header>🚗 First Car Helper</header>
+<header><h1>First Car Helper</h1></header>
 
 <div class="car-list">
-
-<!-- Toyota Yaris -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Toyota_Yaris_2020.jpg">
-<h3>Toyota Yaris</h3>
-<p>€17,000</p>
-<button onclick="add('Toyota Yaris')">Compare</button>
+  <!-- Cars with real images -->
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Toyota_Yaris_2020.jpg" alt="Toyota Yaris"><h4>Toyota Yaris</h4><p>€17,000</p><button onclick="addToCompare('Toyota Yaris')">Compare</button></div>
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Ford_Fiesta_ST_Line_1.0_Front.jpg" alt="Ford Fiesta"><h4>Ford Fiesta</h4><p>€16,500</p><button onclick="addToCompare('Ford Fiesta')">Compare</button></div>
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Volkswagen_Polo_2021.jpg" alt="VW Polo"><h4>VW Polo</h4><p>€18,000</p><button onclick="addToCompare('VW Polo')">Compare</button></div>
+  
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Renault_Clio_4.jpg" alt="Renault Clio"><h4>Renault Clio</h4><p>€15,500</p><button onclick="addToCompare('Renault Clio')">Compare</button></div>
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Hyundai_i10_2017.jpg" alt="Hyundai i10"><h4>Hyundai i10</h4><p>€14,800</p><button onclick="addToCompare('Hyundai i10')">Compare</button></div>
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Vauxhall_Corsa_E.jpg" alt="Vauxhall Corsa"><h4>Vauxhall Corsa</h4><p>€16,200</p><button onclick="addToCompare('Vauxhall Corsa')">Compare</button></div>
+  
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Nissan_Micra_2017.jpg" alt="Nissan Micra"><h4>Nissan Micra</h4><p>€15,900</p><button onclick="addToCompare('Nissan Micra')">Compare</button></div>
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Kia_Picanto_2017.jpg" alt="Kia Picanto"><h4>Kia Picanto</h4><p>€14,300</p><button onclick="addToCompare('Kia Picanto')">Compare</button></div>
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Toyota_Aygo_2019.jpg" alt="Toyota Aygo"><h4>Toyota Aygo</h4><p>€13,500</p><button onclick="addToCompare('Toyota Aygo')">Compare</button></div>
+  
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Fiat_500_2016.jpg" alt="Fiat 500"><h4>Fiat 500</h4><p>€14,900</p><button onclick="addToCompare('Fiat 500')">Compare</button></div>
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Honda_Civic_2018.jpg" alt="Honda Civic"><h4>Honda Civic</h4><p>€19,500</p><button onclick="addToCompare('Honda Civic')">Compare</button></div>
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_Corolla_2019.jpg" alt="Toyota Corolla"><h4>Toyota Corolla</h4><p>€20,000</p><button onclick="addToCompare('Toyota Corolla')">Compare</button></div>
+  
+  <div class="car-card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Peugeot_208_GTI_von_vorne.jpg" alt="Peugeot 208"><h4>Peugeot 208</h4><p>€17,800</p><button onclick="addToCompare('Peugeot 208')">Compare</button></div>
 </div>
 
-<!-- Ford Fiesta -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Ford_Fiesta_ST_Line_1.0_Front.jpg">
-<h3>Ford Fiesta</h3>
-<p>€16,500</p>
-<button onclick="add('Ford Fiesta')">Compare</button>
+<div class="compare-container" id="compareContainer">
+  <div class="compare-slider" id="compareSlider"></div>
+  <div class="nav-buttons">
+    <button onclick="prevSlide()">← Previous</button>
+    <button onclick="nextSlide()">Next →</button>
+  </div>
 </div>
-
-<!-- VW Polo -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Volkswagen_Polo_2021.jpg">
-<h3>VW Polo</h3>
-<p>€18,000</p>
-<button onclick="add('VW Polo')">Compare</button>
-</div>
-
-<!-- Hyundai i10 -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Hyundai_i10_2020.jpg">
-<h3>Hyundai i10</h3>
-<p>€14,500</p>
-<button onclick="add('Hyundai i10')">Compare</button>
-</div>
-
-<!-- Kia Picanto -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Kia_Picanto_2021.jpg">
-<h3>Kia Picanto</h3>
-<p>€14,000</p>
-<button onclick="add('Kia Picanto')">Compare</button>
-</div>
-
-<!-- Toyota Aygo -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Toyota_Aygo_2022.jpg">
-<h3>Toyota Aygo</h3>
-<p>€13,800</p>
-<button onclick="add('Toyota Aygo')">Compare</button>
-</div>
-
-<!-- Nissan Micra -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Nissan_Micra_2019.jpg">
-<h3>Nissan Micra</h3>
-<p>€15,500</p>
-<button onclick="add('Nissan Micra')">Compare</button>
-</div>
-
-<!-- Renault Clio -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Renault_Clio_2020.jpg">
-<h3>Renault Clio</h3>
-<p>€16,000</p>
-<button onclick="add('Renault Clio')">Compare</button>
-</div>
-
-<!-- Opel Corsa -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Opel_Corsa_2021.jpg">
-<h3>Opel Corsa</h3>
-<p>€16,800</p>
-<button onclick="add('Opel Corsa')">Compare</button>
-</div>
-
-<!-- Honda Civic -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Honda_Civic_2022.jpg">
-<h3>Honda Civic</h3>
-<p>€19,000</p>
-<button onclick="add('Honda Civic')">Compare</button>
-</div>
-
-<!-- Toyota Corolla -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Toyota_Corolla_2021.jpg">
-<h3>Toyota Corolla</h3>
-<p>€19,500</p>
-<button onclick="add('Toyota Corolla')">Compare</button>
-</div>
-
-<!-- Mazda 2 -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Mazda2_2021.jpg">
-<h3>Mazda 2</h3>
-<p>€15,200</p>
-<button onclick="add('Mazda 2')">Compare</button>
-</div>
-
-<!-- Peugeot 208 -->
-<div class="car-card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Peugeot_208_2020.jpg">
-<h3>Peugeot 208</h3>
-<p>€16,700</p>
-<button onclick="add('Peugeot 208')">Compare</button>
-</div>
-
-</div>
-
-<div class="compare" id="compareBox"></div>
 
 <script>
-let selected=[];
+const cars = {
+  "Toyota Yaris": {price:"€17,000",engine:"1.5L",fuel:"Petrol",hp:"120",mileage:"5.0L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/9/9b/Toyota_Yaris_2020.jpg"},
+  "Ford Fiesta": {price:"€16,500",engine:"1.0L",fuel:"Petrol",hp:"100",mileage:"5.5L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/5/57/Ford_Fiesta_ST_Line_1.0_Front.jpg"},
+  "VW Polo": {price:"€18,000",engine:"1.0L",fuel:"Petrol",hp:"95",mileage:"5.2L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/e/ed/Volkswagen_Polo_2021.jpg"},
+  "Renault Clio": {price:"€15,500",engine:"1.2L",fuel:"Petrol",hp:"100",mileage:"5.1L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/0/0b/Renault_Clio_4.jpg"},
+  "Hyundai i10": {price:"€14,800",engine:"1.0L",fuel:"Petrol",hp:"67",mileage:"4.8L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/5/5b/Hyundai_i10_2017.jpg"},
+  "Vauxhall Corsa": {price:"€16,200",engine:"1.2L",fuel:"Petrol",hp:"75",mileage:"5.5L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/6/69/Vauxhall_Corsa_E.jpg"},
+  "Nissan Micra": {price:"€15,900",engine:"1.0L",fuel:"Petrol",hp:"90",mileage:"5.7L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/0/07/Nissan_Micra_2017.jpg"},
+  "Kia Picanto": {price:"€14,300",engine:"1.0L",fuel:"Petrol",hp:"66",mileage:"5.4L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/8/82/Kia_Picanto_2017.jpg"},
+  "Toyota Aygo": {price:"€13,500",engine:"1.0L",fuel:"Petrol",hp:"72",mileage:"5.6L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/3/30/Toyota_Aygo_2019.jpg"},
+  "Fiat 500": {price:"€14,900",engine:"1.2L",fuel:"Petrol",hp:"69",mileage:"5.3L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/1/15/Fiat_500_2016.jpg"},
+  "Honda Civic": {price:"€19,500",engine:"1.5L",fuel:"Petrol",hp:"130",mileage:"5.8L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/c/ca/Honda_Civic_2018.jpg"},
+  "Toyota Corolla": {price:"€20,000",engine:"1.6L",fuel:"Petrol",hp:"132",mileage:"5.7L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_Corolla_2019.jpg"},
+  "Peugeot 208": {price:"€17,800",engine:"1.2L",fuel:"Petrol",hp:"100",mileage:"4.9L/100km",image:"https://upload.wikimedia.org/wikipedia/commons/0/0d/Peugeot_208_GTI_von_vorne.jpg"}
+};
 
-function add(car){
-    if(!selected.includes(car)&&selected.length<2){
-        selected.push(car);
-        document.getElementById("compareBox").style.display="block";
-        document.getElementById("compareBox").innerHTML="Comparing: "+selected.join(" vs ");
-    }
+let compareCars = [];
+let currentSlide = 0;
+
+function addToCompare(carName) {
+  if (!compareCars.includes(carName) && compareCars.length < 2) {
+    compareCars.push(carName);
+    updateCompareSlider();
+  }
 }
-</script>
 
-</body>
-</html>
+function updateCompareSlider() {
+  if(compareCars.length === 0) return;
+  const slider = document.getElementById('compareSlider
