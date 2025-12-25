@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Car Helper</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f6f8;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    padding:15px;
+    text-align:center;
+    font-size:22px;
+}
+
+.car-list{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:15px;
+    gap:15px;
+}
+
+.car-card{
+    background:white;
+    width:180px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    padding:10px;
+    text-align:center;
+}
+
+.car-card img{
+    width:100%;
+    border-radius:10px;
+}
+
+.car-card h3{
+    margin:8px 0 4px;
+}
+
+button{
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:8px;
+    width:100%;
+    border-radius:8px;
+    margin-top:8px;
+}
+
+.compare{
+    background:white;
+    margin:10px;
+    padding:15px;
+    border-radius:10px;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>🚗 First Car Helper</header>
+
+<div class="car-list">
+
+<!-- Toyota Yaris -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Toyota_Yaris_2020.jpg">
+<h3>Toyota Yaris</h3>
+<p>€17,000</p>
+<button onclick="add('Toyota Yaris')">Compare</button>
+</div>
+
+<!-- Ford Fiesta -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Ford_Fiesta_ST_Line_1.0_Front.jpg">
+<h3>Ford Fiesta</h3>
+<p>€16,500</p>
+<button onclick="add('Ford Fiesta')">Compare</button>
+</div>
+
+<!-- VW Polo -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Volkswagen_Polo_2021.jpg">
+<h3>VW Polo</h3>
+<p>€18,000</p>
+<button onclick="add('VW Polo')">Compare</button>
+</div>
+
+<!-- Hyundai i10 -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Hyundai_i10_2020.jpg">
+<h3>Hyundai i10</h3>
+<p>€14,500</p>
+<button onclick="add('Hyundai i10')">Compare</button>
+</div>
+
+<!-- Kia Picanto -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Kia_Picanto_2021.jpg">
+<h3>Kia Picanto</h3>
+<p>€14,000</p>
+<button onclick="add('Kia Picanto')">Compare</button>
+</div>
+
+<!-- Toyota Aygo -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Toyota_Aygo_2022.jpg">
+<h3>Toyota Aygo</h3>
+<p>€13,800</p>
+<button onclick="add('Toyota Aygo')">Compare</button>
+</div>
+
+<!-- Nissan Micra -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Nissan_Micra_2019.jpg">
+<h3>Nissan Micra</h3>
+<p>€15,500</p>
+<button onclick="add('Nissan Micra')">Compare</button>
+</div>
+
+<!-- Renault Clio -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Renault_Clio_2020.jpg">
+<h3>Renault Clio</h3>
+<p>€16,000</p>
+<button onclick="add('Renault Clio')">Compare</button>
+</div>
+
+<!-- Opel Corsa -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Opel_Corsa_2021.jpg">
+<h3>Opel Corsa</h3>
+<p>€16,800</p>
+<button onclick="add('Opel Corsa')">Compare</button>
+</div>
+
+<!-- Honda Civic -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Honda_Civic_2022.jpg">
+<h3>Honda Civic</h3>
+<p>€19,000</p>
+<button onclick="add('Honda Civic')">Compare</button>
+</div>
+
+<!-- Toyota Corolla -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Toyota_Corolla_2021.jpg">
+<h3>Toyota Corolla</h3>
+<p>€19,500</p>
+<button onclick="add('Toyota Corolla')">Compare</button>
+</div>
+
+<!-- Mazda 2 -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Mazda2_2021.jpg">
+<h3>Mazda 2</h3>
+<p>€15,200</p>
+<button onclick="add('Mazda 2')">Compare</button>
+</div>
+
+<!-- Peugeot 208 -->
+<div class="car-card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Peugeot_208_2020.jpg">
+<h3>Peugeot 208</h3>
+<p>€16,700</p>
+<button onclick="add('Peugeot 208')">Compare</button>
+</div>
+
+</div>
+
+<div class="compare" id="compareBox"></div>
+
+<script>
+let selected=[];
+
+function add(car){
+    if(!selected.includes(car)&&selected.length<2){
+        selected.push(car);
+        document.getElementById("compareBox").style.display="block";
+        document.getElementById("compareBox").innerHTML="Comparing: "+selected.join(" vs ");
+    }
+}
+</script>
+
+</body>
+</html>
