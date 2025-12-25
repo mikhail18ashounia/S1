@@ -1,10 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My GitHub Site</title>
+<title>Car Comparison</title>
+<style>
+body {
+font-family: Arial;
+background: #f4f4f4;
+text-align: center;
+padding: 20px;
+}
+h1 {
+color: #333;
+}
+select {
+padding: 10px;
+margin: 10px;
+font-size: 16px;
+}
+.container {
+display: flex;
+justify-content: center;
+gap: 40px;
+margin-top: 20px;
+}
+.card {
+background: white;
+padding: 20px;
+width: 250px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.card h2 {
+color: #007bff;
+}
+</style>
 </head>
 <body>
-  <h1>🎉 My site is live</h1>
-  <p>GitHub Pages is working!</p>
+
+<h1>🚗 Car Comparison Tool</h1>
+
+<select id="car1" onchange="compare()"></select>
+<select id="car2" onchange="compare()"></select>
+
+<div class="container">
+<div class="card" id="car1Data"></div>
+<div class="card" id="car2Data"></div>
+</div>
+
+<script>
+const cars = [
+{name:"Toyota Corolla", price:"$22,000", hp:"169 HP", mpg:"31/40"},
+{name:"Honda Civic", price:"$24,000", hp:"158 HP", mpg:"31/40"},
+{name:"Tesla Model 3", price:"$40,000", hp:"283 HP", mpg:"Electric"},
+{name:"BMW 3 Series", price:"$45,000", hp:"255 HP", mpg:"26/36"},
+{name:"Ford Mustang", price:"$30,000", hp:"310 HP", mpg:"21/32"}
+];
+
+const car1 = document.getElementById("car1");
+const car2 = document.getElementById("car2");
+
+cars.forEach((car, index) => {
+car1.add(new Option(car.name, index));
+car2.add(new Option(car.name, index));
+});
+
+function compare() {
+const c1 = cars[car1.value];
+const c2 = cars[car2.value];
+
+document.getElementById("car1Data").innerHTML = `
+<h2>${c1.name}</h2>
+<p>Price: ${c1.price}</p>
+<p>Horsepower: ${c1.hp}</p>
+<p>MPG: ${c1.mpg}</p>
+`;
+
+document.getElementById("car2Data").innerHTML = `
+<h2>${c2.name}</h2>
+<p>Price: ${c2.price}</p>
+<p>Horsepower: ${c2.hp}</p>
+<p>MPG: ${c2.mpg}</p>
+`;
+}
+
+compare();
+</script>
+
 </body>
 </html>
